@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<project name="domwires-ext-physics" basedir="." default="commons.package_swc">
+    <property name="path" value="../domwires-as3/core/out/swc"/>
+    <property name="sftp-path-suffix" value="physics"/>
+
+    <import file="${basedir}/../domwires-builder/build/ant/commons.xml"/>
+
+    <property name="swc_name" value="dw-ext-physics-${ver.num}.swc"/>
+    <property name="swc_fat_name" value="dw-ext-physics-${ver.num}-fat.swc"/>
+</project>
