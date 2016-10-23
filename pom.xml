@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.domwires</groupId>
+  <artifactId>physics</artifactId>
+  <packaging>swc</packaging>
+  <version>0.9.0</version>
+  <repositories>
+    <repository>
+      <id>CrazyFlasher</id>
+      <url>https://raw.github.com/CrazyFlasher/maven-repo/master</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache</groupId>
+      <artifactId>flexunit</artifactId>
+      <version>4.2.0</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.domwires</groupId>
+      <artifactId>builder</artifactId>
+      <version>0.9.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.domwires</groupId>
+      <artifactId>core</artifactId>
+      <version>0.9.0</version>
+      <type>swc</type>
+    </dependency>
+    <dependency>
+      <groupId>com.napephys</groupId>
+      <artifactId>nape-release</artifactId>
+      <version>1.0.0</version>
+      <type>swc</type>
+    </dependency>
+    <dependency>
+      <groupId>com.napephys</groupId>
+      <artifactId>nape-hacks</artifactId>
+      <version>1.0.0</version>
+      <type>swc</type>
+    </dependency>
+  </dependencies>
+</project>
