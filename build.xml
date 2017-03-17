@@ -2,7 +2,7 @@
 <project name="domwires-ext-physics" basedir="." default="package">
     <property name="flexunit.version" value="4.2.0"/>
     <property name="swf-version" value="33"/>
-    <property name="target-player" value="22.0"/>
+    <property name="target-player" value="24"/>
 
     <property name="swc_name" value="dw-physics.swc"/>
 
