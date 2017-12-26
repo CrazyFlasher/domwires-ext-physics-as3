@@ -3,15 +3,13 @@
  */
 package com.domwires.extensions.physics
 {
-	import com.domwires.core.common.IDisposable;
-	import com.domwires.extensions.physics.vo.units.WorldDataVo;
+	import com.domwires.core.mvc.model.IModelContainer;
 
 	import nape.space.Space;
 
 	WorldObject;
-	public interface IWorldObject extends IDisposable
+	public interface IWorldObject extends IModelContainer
 	{
-		function get data():WorldDataVo;
 		function get bodyObjectList():Vector.<IBodyObject>;
 		function get jointObjectList():Vector.<IJointObject>;
 		function bodyObjectById(id:String):IBodyObject;
@@ -19,8 +17,9 @@ package com.domwires.extensions.physics
 		function get space():Space;
 		function clone():IWorldObject;
 
-//		function addBodyObject(value:IBodyObject):IWorldObject;
-//		function removeBodyObject(value:IBodyObject):IWorldObject;
+		function addBodyObject(bodyObject:IBodyObject):IWorldObject;
+		function removeBodyObject(bodyObject:IBodyObject):IWorldObject;
+
 //		function addJointObject(value:IJointObject):IWorldObject;
 //		function removeJointObject(value:IJointObject):IWorldObject;
 	}

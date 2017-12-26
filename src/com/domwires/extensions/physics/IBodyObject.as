@@ -3,13 +3,13 @@
  */
 package com.domwires.extensions.physics
 {
-	import com.domwires.core.common.IDisposable;
+	import com.domwires.core.mvc.model.IModelContainer;
 	import com.domwires.extensions.physics.vo.units.BodyDataVo;
 
 	import nape.phys.Body;
 
 	BodyObject;
-	public interface IBodyObject extends IDisposable
+	public interface IBodyObject extends IModelContainer
 	{
 		function get shapeObjectList():Vector.<IShapeObject>;
 		function get data():BodyDataVo;

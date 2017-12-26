@@ -31,14 +31,14 @@ package com.domwires.extensions.physics.vo.units
 			var shapes:Vector.<ShapeDataVo> = new <ShapeDataVo>[];
 			for each (var shapeJson:Object in json.shapes)
 			{
-				var shapeData:ShapeDataVo = factory.getInstance(ShapeDataVo, [shapeJson]);
+				var shapeData:ShapeDataVo = factory.getInstance(ShapeDataVo, shapeJson);
 				shapes.push(shapeData);
 			}
 
 			_shapeDataList = shapes;
 
-			_material = factory.getInstance(ShapeMaterialVo, [json.material]);
-			_interactionFilter = factory.getInstance(InteractionFilterVo, [json.filter]);
+			_material = factory.getInstance(ShapeMaterialVo, json.material);
+			_interactionFilter = factory.getInstance(InteractionFilterVo, json.filter);
 
 			if(json.angle != null)
 			{

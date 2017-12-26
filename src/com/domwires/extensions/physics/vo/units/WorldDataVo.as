@@ -23,14 +23,14 @@ package com.domwires.extensions.physics.vo.units
 			var bodies:Vector.<BodyDataVo> = new <BodyDataVo>[];
 			for each (var bodyJson:Object in json.bodies)
 			{
-				var bodyData:BodyDataVo = factory.getInstance(BodyDataVo, [bodyJson]);
+				var bodyData:BodyDataVo = factory.getInstance(BodyDataVo, bodyJson);
 				bodies.push(bodyData);
 			}
 
 			var joints:Vector.<JointDataVo> = new <JointDataVo>[];
 			for each (var jointJson:Object in json.joints)
 			{
-				var jointData:JointDataVo = factory.getInstance(JointDataVo, [jointJson]);
+				var jointData:JointDataVo = factory.getInstance(JointDataVo, jointJson);
 				joints.push(jointData);
 			}
 

@@ -11,7 +11,7 @@ package com.domwires.extensions.physics.vo
 		private var _density:Number = 1.0;
 		private var _rollingFriction:Number = 0.001;
 
-		public function ShapeMaterialVo(json:Object)
+		public function ShapeMaterialVo(json:Object = null)
 		{
 			if (json)
 			{

@@ -5,6 +5,8 @@ package com.domwires.extensions.physics
 {
 	import com.domwires.core.common.AbstractDisposable;
 	import com.domwires.core.factory.IAppFactory;
+	import com.domwires.core.factory.IAppFactoryImmutable;
+	import com.domwires.core.mvc.model.AbstractModel;
 	import com.domwires.extensions.physics.vo.units.JointDataVo;
 
 	import nape.constraint.AngleJoint;
@@ -12,10 +14,10 @@ package com.domwires.extensions.physics
 	import nape.geom.Vec2;
 	import nape.phys.Body;
 
-	public class JointObject extends AbstractDisposable implements IJointObject
+	public class JointObject extends AbstractModel implements IJointObject
 	{
 		[Autowired]
-		public var factory:IAppFactory;
+		public var factory:IAppFactoryImmutable;
 
 		private var _data:JointDataVo;
 
@@ -73,7 +75,7 @@ package com.domwires.extensions.physics
 
 		public function clone():IJointObject
 		{
-			var c:IJointObject = factory.getInstance(IJointObject, [_data]);
+			var c:IJointObject = factory.getInstance(IJointObject, _data);
 			return c;
 		}
 	}

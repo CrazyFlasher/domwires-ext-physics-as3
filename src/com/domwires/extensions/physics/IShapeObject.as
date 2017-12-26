@@ -3,13 +3,13 @@
  */
 package com.domwires.extensions.physics
 {
-	import com.domwires.core.common.IDisposable;
+	import com.domwires.core.mvc.model.IModelContainer;
 	import com.domwires.extensions.physics.vo.units.ShapeDataVo;
 
 	import nape.shape.Shape;
 
 	ShapeObject;
-	public interface IShapeObject extends IDisposable
+	public interface IShapeObject extends IModelContainer
 	{
 		function get vertexObjectList():Vector.<IVertexObject>;
 		function get data():ShapeDataVo;

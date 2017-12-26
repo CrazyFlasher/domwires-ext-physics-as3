@@ -3,12 +3,12 @@
  */
 package com.domwires.extensions.physics.vo.units
 {
-	import com.domwires.core.factory.IAppFactory;
+	import com.domwires.core.factory.IAppFactoryImmutable;
 
 	public class PhysicsUnitDataVo
 	{
 		[Autowired]
-		public var factory:IAppFactory;
+		public var factory:IAppFactoryImmutable;
 
 		protected var json:Object;
 

@@ -12,7 +12,7 @@ package com.domwires.extensions.physics.vo
 		private var _fluidGroup:int = 1;
 		private var _fluidMask:int = -1;
 
-		public function InteractionFilterVo(json:Object)
+		public function InteractionFilterVo(json:Object = null)
 		{
 			if (json)
 			{

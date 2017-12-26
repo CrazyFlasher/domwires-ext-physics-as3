@@ -3,8 +3,8 @@
  */
 package com.domwires.extensions.physics
 {
-	import com.domwires.core.common.AbstractDisposable;
-	import com.domwires.core.factory.IAppFactory;
+	import com.domwires.core.factory.IAppFactoryImmutable;
+	import com.domwires.core.mvc.model.ModelContainer;
 	import com.domwires.extensions.physics.vo.units.BodyDataVo;
 	import com.domwires.extensions.physics.vo.units.ShapeDataVo;
 
@@ -13,10 +13,10 @@ package com.domwires.extensions.physics
 	import nape.phys.BodyType;
 	import nape.phys.Material;
 
-	public class BodyObject extends AbstractDisposable implements IBodyObject
+	public class BodyObject extends ModelContainer implements IBodyObject
 	{
 		[Autowired]
-		public var factory:IAppFactory;
+		public var factory:IAppFactoryImmutable;
 
 		private var _body:Body;
 
@@ -39,8 +39,10 @@ package com.domwires.extensions.physics
 			var shapeObject:IShapeObject;
 			for each (var shapeData:ShapeDataVo in _data.shapeDataList)
 			{
-				shapeObject = factory.getInstance(IShapeObject, [shapeData]);
+				shapeObject = factory.getInstance(IShapeObject, shapeData);
 				_shapeObjectList.push(shapeObject);
+
+				addModel(shapeObject);
 			}
 
 			var bodyType:BodyType;
@@ -137,7 +139,7 @@ package com.domwires.extensions.physics
 
 		public function clone():IBodyObject
 		{
-			var c:IBodyObject = factory.getInstance(IBodyObject, [_data]);
+			var c:IBodyObject = factory.getInstance(IBodyObject, _data);
 			return c;
 		}
 	}

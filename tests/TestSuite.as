@@ -3,8 +3,6 @@
  */
 package
 {
-	import com.crazyfm.extensions.physics.utils.PhysicsParserTest;
-
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -17,7 +15,7 @@ package
 	public class TestSuite extends Sprite
 	{
 		public static const ALL_TESTS:Array = [
-				PhysicsParserTest
+//				PhysicsParserTest
 		];
 
 		private var _flexunit:FlexUnitCore;

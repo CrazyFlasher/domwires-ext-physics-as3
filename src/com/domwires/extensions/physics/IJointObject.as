@@ -3,7 +3,7 @@
  */
 package com.domwires.extensions.physics
 {
-	import com.domwires.core.common.IDisposable;
+	import com.domwires.core.mvc.model.IModel;
 	import com.domwires.extensions.physics.vo.units.JointDataVo;
 
 	import nape.constraint.AngleJoint;
@@ -11,7 +11,7 @@ package com.domwires.extensions.physics
 	import nape.phys.Body;
 
 	JointObject;
-	public interface IJointObject extends IDisposable
+	public interface IJointObject extends IModel
 	{
 		function get data():JointDataVo;
 		function get pivotJoint():PivotJoint;

@@ -5,6 +5,8 @@ package com.domwires.extensions.physics
 {
 	import com.domwires.core.common.AbstractDisposable;
 	import com.domwires.core.factory.IAppFactory;
+	import com.domwires.core.factory.IAppFactoryImmutable;
+	import com.domwires.core.mvc.model.ModelContainer;
 	import com.domwires.extensions.physics.vo.InteractionFilterVo;
 	import com.domwires.extensions.physics.vo.ShapeMaterialVo;
 	import com.domwires.extensions.physics.vo.units.ShapeDataVo;
@@ -20,10 +22,10 @@ package com.domwires.extensions.physics
 	import nape.shape.Polygon;
 	import nape.shape.Shape;
 
-	public class ShapeObject extends AbstractDisposable implements IShapeObject
+	public class ShapeObject extends ModelContainer implements IShapeObject
 	{
 		[Autowired]
-		public var factory:IAppFactory;
+		public var factory:IAppFactoryImmutable;
 
 		private var _shapes:Vector.<Shape>;
 
@@ -52,6 +54,8 @@ package com.domwires.extensions.physics
 
 			_shapes = new <Shape>[];
 
+			var dataObject:IShapeObject = this;
+
 			if (isNaN(_data.radius))
 			{
 				_vertexObjectList = new <IVertexObject>[];
@@ -59,10 +63,12 @@ package com.domwires.extensions.physics
 
 				for each (var vertexData:VertexDataVo in _data.vertexDataList)
 				{
-					var vertexObject:IVertexObject = factory.getInstance(IVertexObject, [vertexData]);
+					var vertexObject:IVertexObject = factory.getInstance(IVertexObject, vertexData);
 
 					_vertexObjectList.push(vertexObject);
 					verticesVec2.push(new Vec2(vertexObject.vertex.x, vertexObject.vertex.y));
+
+					addModel(vertexObject);
 				}
 
 				var geom:GeomPoly = new GeomPoly(verticesVec2);
@@ -71,8 +77,6 @@ package com.domwires.extensions.physics
 				geom.transform( m_1.concat(m_2));
 
 				var geomList:GeomPolyList = geom.convexDecomposition();
-
-				var dataObject:IShapeObject = this;
 
 				geomList.foreach(function(gp:GeomPoly):void {
 					var poly:Polygon = new Polygon(gp);
@@ -137,7 +141,7 @@ package com.domwires.extensions.physics
 
 		public function clone():IShapeObject
 		{
-			var c:IShapeObject = factory.getInstance(IShapeObject, [_data]);
+			var c:IShapeObject = factory.getInstance(IShapeObject, _data);
 			return c;
 		}
 	}

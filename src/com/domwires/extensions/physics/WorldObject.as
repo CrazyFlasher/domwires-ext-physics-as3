@@ -3,8 +3,10 @@
  */
 package com.domwires.extensions.physics
 {
-	import com.domwires.core.common.AbstractDisposable;
-	import com.domwires.core.factory.IAppFactory;
+	import com.domwires.core.factory.IAppFactoryImmutable;
+	import com.domwires.core.mvc.model.IModel;
+	import com.domwires.core.mvc.model.IModelContainer;
+	import com.domwires.core.mvc.model.ModelContainer;
 	import com.domwires.extensions.physics.vo.units.BodyDataVo;
 	import com.domwires.extensions.physics.vo.units.JointDataVo;
 	import com.domwires.extensions.physics.vo.units.WorldDataVo;
@@ -14,10 +16,10 @@ package com.domwires.extensions.physics
 	import nape.phys.BodyList;
 	import nape.space.Space;
 
-	public class WorldObject extends AbstractDisposable implements IWorldObject
+	public class WorldObject extends ModelContainer implements IWorldObject
 	{
 		[Autowired]
-		public var factory:IAppFactory;
+		public var factory:IAppFactoryImmutable;
 
 		private var _space:Space;
 
@@ -43,10 +45,9 @@ package com.domwires.extensions.physics
 			var bodyObject:IBodyObject;
 			for each (var bodyData:BodyDataVo in _data.bodyDataList)
 			{
-				bodyObject = factory.getInstance(IBodyObject, [bodyData]);
-				_bodyObjectList.push(bodyObject);
+				bodyObject = factory.getInstance(IBodyObject, bodyData);
 
-				_space.bodies.add(bodyObject.body);
+				addBodyObject(bodyObject);
 			}
 
 			_jointObjectList = new <IJointObject>[];
@@ -55,7 +56,7 @@ package com.domwires.extensions.physics
 			var bodiesToConnect:Vector.<Body>;
 			for each (var jointData:JointDataVo in _data.jointDataList)
 			{
-				jointObject = factory.getInstance(IJointObject, [jointData]);
+				jointObject = factory.getInstance(IJointObject, jointData);
 
 				bodiesToConnect = getBodiesToConnect(jointObject.data);
 
@@ -71,10 +72,34 @@ package com.domwires.extensions.physics
 					}
 
 					_jointObjectList.push(jointObject);
+
+					addModel(jointObject);
 				}
 			}
 
 			_space.userData.dataObject = this;
+		}
+
+		public function addBodyObject(bodyObject:IBodyObject):IWorldObject
+		{
+			addModel(bodyObject);
+
+			_bodyObjectList.push(bodyObject);
+
+			_space.bodies.add(bodyObject.body);
+
+			return this;
+		}
+
+		public function removeBodyObject(bodyObject:IBodyObject):IWorldObject
+		{
+			removeModel(bodyObject);
+
+			_bodyObjectList.removeAt(_bodyObjectList.indexOf(bodyObject));
+
+			_space.bodies.remove(bodyObject.body);
+
+			return this;
 		}
 
 		private function getBodiesToConnect(data:JointDataVo):Vector.<Body>
@@ -186,7 +211,7 @@ package com.domwires.extensions.physics
 
 		public function clone():IWorldObject
 		{
-			var c:IWorldObject = factory.getInstance(IWorldObject, [_data]);
+			var c:IWorldObject = factory.getInstance(IWorldObject, _data);
 			return c;
 		}
 	}

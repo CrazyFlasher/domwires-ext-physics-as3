@@ -3,16 +3,16 @@
  */
 package com.domwires.extensions.physics
 {
-	import com.domwires.core.common.AbstractDisposable;
-	import com.domwires.core.factory.IAppFactory;
+	import com.domwires.core.factory.IAppFactoryImmutable;
+	import com.domwires.core.mvc.model.AbstractModel;
 	import com.domwires.extensions.physics.vo.units.VertexDataVo;
 
 	import nape.geom.Vec2;
 
-	public class VertexObject extends AbstractDisposable implements IVertexObject
+	public class VertexObject extends AbstractModel implements IVertexObject
 	{
 		[Autowired]
-		public var factory:IAppFactory;
+		public var factory:IAppFactoryImmutable;
 
 		private var _vertex:Vec2;
 
@@ -64,7 +64,7 @@ package com.domwires.extensions.physics
 
 		public function clone():IVertexObject
 		{
-			var c:IVertexObject = factory.getInstance(IVertexObject, [_data]);
+			var c:IVertexObject = factory.getInstance(IVertexObject, _data);
 			return c;
 		}
 	}
